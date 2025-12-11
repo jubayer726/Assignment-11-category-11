@@ -1,154 +1,129 @@
 import { useState } from "react";
+import axios from "axios";
+import useAuth from './../../../hooks/useAuth';
+import toast from "react-hot-toast";
 
 const AddRegisterForm = () => {
- const [formData, setFormData] = useState({
-    studentName: "",
-    class: "",
-    subject: "",
-    budget: "",
+  const {user} = useAuth();
+  const [formData, setFormData] = useState({
+    title: "",
+    studentClass: "",
+    subjects: "",
+    salary: "",
     location: "",
-    schedule: "",
-    type: "",
+    daysPerWeek: "",
     description: "",
+    name: user.displayName,
+    image: user.photoURL
   });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Tuition Posted Successfully!");
+    try {
+      const res = await axios.post("http://localhost:3000/tuitions", formData);
+      console.log(res.data);
+      toast.success("Tuition Post Submitted Successfully!");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to submit!");
+    }
   };
+
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center py-12 px-6">
-      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-3xl">
+    <div className="max-w-xl mx-auto bg-white p-8 shadow-lg rounded-lg">
+      <h2 className="text-2xl font-bold mb-4">Post a Tuition</h2>
 
-        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
-          Post a New Tuition
-        </h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <input
+          type="text"
+          name="title"
+          placeholder="Tuition Title"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Student Name */}
-          <div>
-            <label className="block font-semibold mb-1">Student Name</label>
-            <input
-              type="text"
-              name="studentName"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Enter student name"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* <input
+          type="text"
+          name="studentClass"
+          placeholder="Student Class (e.g. Class 8)"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
+         */}
+        <select
+          name="studentClass"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select Class</option>
+          <option value="Class Five">Class Five</option>
+          <option value="Class Six">Class Six</option>
+          <option value="Class Seven">Class Seven</option>
+          <option value="Class Eight">Class Eight</option>
+          <option value="Class Nine">Class Nine</option>
+          <option value="Class Ten">Class Ten</option>
+        </select>
 
-          {/* Class */}
-          <div>
-            <label className="block font-semibold mb-1">Class</label>
-            <input
-              type="text"
-              name="class"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. Class 8, Class 10, HSC"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <input
+          type="text"
+          name="subjects"
+          placeholder="Subjects (e.g. Math, English)"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Subject */}
-          <div>
-            <label className="block font-semibold mb-1">Subject</label>
-            <input
-              type="text"
-              name="subject"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. Math, English, Physics"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <input
+          type="number"
+          name="salary"
+          placeholder="Salary (BDT)"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Budget */}
-          <div>
-            <label className="block font-semibold mb-1">Monthly Budget (BDT)</label>
-            <input
-              type="number"
-              name="budget"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. 1500"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <input
+          type="text"
+          name="location"
+          placeholder="Location (e.g. Mirpur-10)"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Location */}
-          <div>
-            <label className="block font-semibold mb-1">Location</label>
-            <input
-              type="text"
-              name="location"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. Mirpur 10, Dhanmondi, Online"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <input
+          type="text"
+          name="daysPerWeek"
+          placeholder="Days per week (e.g. 3 days)"
+          className="w-full border px-4 py-2 rounded"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Schedule */}
-          <div>
-            <label className="block font-semibold mb-1">Preferred Schedule</label>
-            <input
-              type="text"
-              name="schedule"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. 3 Days/Week, Every Evening"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        <textarea
+          name="description"
+          placeholder="Write description..."
+          className="w-full border px-4 py-2 rounded"
+          rows="4"
+          onChange={handleChange}
+          required
+        />
 
-          {/* Tuition Type */}
-          <div>
-            <label className="block font-semibold mb-1">Tuition Type</label>
-            <select
-              name="type"
-              className="w-full border rounded-lg px-4 py-2"
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Type</option>
-              <option value="Online">Online</option>
-              <option value="Offline">Offline</option>
-              <option value="Home Visit">Home Visit</option>
-            </select>
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block font-semibold mb-1">Description</label>
-            <textarea
-              name="description"
-              rows="4"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Add additional details about the tuition..."
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition"
-          >
-            Post Tuition
-          </button>
-
-        </form>
-      </div>
+        <button type="submit" className="w-full bg-indigo-600 text-white py-2 rounded">
+          Submit Tuition
+        </button>
+        
+      </form>
     </div>
   );
 };
-export default AddRegisterForm
+
+export default AddRegisterForm;

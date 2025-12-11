@@ -1,219 +1,176 @@
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import { useState } from "react";
 
 const TutorForm = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    gender: "",
-    experience: "",
-    salary: "",
-    subjects: "",
-    classes: "",
-    method: "",
-    address: "",
-    photo: "",
-    bio: "",
-  });
+  const { register, handleSubmit, formState: { errors }, reset} = useForm();
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
+  const [loading, setLoading] = useState(false);
 
-    if (name === "photo") {
-      setFormData({ ...formData, photo: files[0] });
-    } else {
-      setFormData({ ...formData, [name]: value });
+  const imgUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`;
+
+  const onSubmit = async (data) => {
+
+    try {
+      setLoading(true);
+      // Uploading photo to imgbb
+      const imgFile = new FormData();
+      imgFile.append("image", data.photo[0]);
+      const imgRes = await axios.post(imgUrl, imgFile);
+
+      const photoURL = imgRes.data.data.url;
+
+      // Prepare final data
+      const tutorData = {
+        ...data,
+        photo: photoURL,
+      };
+
+      console.log("Final Tutor Data:", tutorData);
+
+      // Send to backend (future API)
+      await axios.post("http://localhost:3000/tutors", tutorData);
+
+      alert("Application Submitted Successfully!");
+      reset();
+      setLoading(false);
+    } 
+    catch (error) {
+      console.error(error);
+      alert("Image Upload Failed!");
+      setLoading(false);
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-    alert("Tutor Application Submitted Successfully!");
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center py-12 px-6">
-      <div className="bg-white shadow-xl rounded-xl p-8 w-full max-w-3xl">
+    <div className="max-w-3xl mx-auto p-8 bg-white shadow-lg rounded-xl mt-10">
+      <h2 className="text-3xl font-bold mb-6 text-center text-indigo-600">
+        Tutor Application Form
+      </h2>
 
-        <h2 className="text-3xl font-bold mb-6 text-gray-800 text-center">
-          Tutor Application Form
-        </h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Full Name */}
+        <div>
+          <label className="font-medium">Full Name</label>
+          <input
+            {...register("name", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="Your name"
+          />
+          {errors.name && <p className="text-red-500 text-sm">Name is required</p>}
+        </div>
 
-          {/* Full Name */}
-          <div>
-            <label className="block font-semibold mb-1">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Enter your full name"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Email */}
+        <div>
+          <label className="font-medium">Email</label>
+          <input
+            type="email"
+            {...register("email", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="Your email"
+          />
+          {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
+        </div>
 
-          {/* Email */}
-          <div>
-            <label className="block font-semibold mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Enter your email"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Phone */}
+        <div>
+          <label className="font-medium">Phone</label>
+          <input
+            type="text"
+            {...register("image", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="017XXXXXXXX"
+          />
+          {errors.phone && <p className="text-red-500 text-sm">Phone is required</p>}
+        </div>
 
-          {/* Phone */}
-          <div>
-            <label className="block font-semibold mb-1">Phone Number</label>
-            <input
-              type="tel"
-              name="phone"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="01XXXXXXXXX"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Age */}
+        <div>
+          <label className="font-medium">Age</label>
+          <input
+            type="number"
+            {...register("age", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="Your age"
+          />
+          {errors.age && <p className="text-red-500 text-sm">Age is required</p>}
+        </div>
 
-          {/* Gender */}
-          <div>
-            <label className="block font-semibold mb-1">Gender</label>
-            <select
-              name="gender"
-              className="w-full border rounded-lg px-4 py-2"
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Gender</option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+        {/* Qualification */}
+        <div className="md:col-span-2">
+          <label className="font-medium">Highest Qualification</label>
+          <input
+            {...register("qualification", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="HSC / Honours / Masters"
+          />
+          {errors.qualification && (
+            <p className="text-red-500 text-sm">Qualification is required</p>
+          )}
+        </div>
 
-          {/* Experience */}
-          <div>
-            <label className="block font-semibold mb-1">Teaching Experience</label>
-            <input
-              type="text"
-              name="experience"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. 2 years, Beginner"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Subjects */}
+        <div className="md:col-span-2">
+          <label className="font-medium">Subjects You Can Teach</label>
+          <input
+            {...register("subjects", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="Math, English, Science..."
+          />
+          {errors.subjects && (
+            <p className="text-red-500 text-sm">Subjects required</p>
+          )}
+        </div>
 
-          {/* Expected Salary */}
-          <div>
-            <label className="block font-semibold mb-1">Expected Salary (BDT)</label>
-            <input
-              type="number"
-              name="salary"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. 3000"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Address */}
+        <div className="md:col-span-2">
+          <label className="font-medium">Address</label>
+          <input
+            {...register("address", { required: true })}
+            className="border p-3 rounded w-full"
+            placeholder="Your full address"
+          />
+          {errors.address && (
+            <p className="text-red-500 text-sm">Address is required</p>
+          )}
+        </div>
 
-          {/* Preferred Subjects */}
-          <div>
-            <label className="block font-semibold mb-1">Preferred Subjects</label>
-            <input
-              type="text"
-              name="subjects"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. Math, English, Physics"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Experience */}
+        <div className="md:col-span-2">
+          <label className="font-medium">Teaching Experience (optional)</label>
+          <textarea
+            {...register("experience")}
+            className="border p-3 rounded w-full"
+            rows="4"
+            placeholder="Describe your experience"
+          ></textarea>
+        </div>
 
-          {/* Preferred Classes */}
-          <div>
-            <label className="block font-semibold mb-1">Preferred Classes</label>
-            <input
-              type="text"
-              name="classes"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="e.g. Class 5 - 10, HSC"
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Photo Upload */}
+        <div className="md:col-span-2">
+          <label className="font-medium">Upload Your Photo</label>
+          <input
+            type="file"
+            {...register("photo", { required: true })}
+            className="border p-3 rounded w-full"
+            accept="image/*"
+          />
+          {errors.photo && (
+            <p className="text-red-500 text-sm">Photo is required</p>
+          )}
+        </div>
 
-          {/* Teaching Method */}
-          <div>
-            <label className="block font-semibold mb-1">Teaching Method</label>
-            <select
-              name="method"
-              className="w-full border rounded-lg px-4 py-2"
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select Method</option>
-              <option value="Online">Online</option>
-              <option value="Offline">Offline (Student's Home)</option>
-              <option value="Home Visit">Home Visit (Tutor's Home)</option>
-            </select>
-          </div>
+        {/* Submit */}
+        <button
+          type="submit"
+          disabled={loading}
+          className="md:col-span-2 bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold"
+        >
+          {loading ? "Uploading..." : "Submit Application"}
+        </button>
 
-          {/* Address */}
-          <div>
-            <label className="block font-semibold mb-1">Address</label>
-            <input
-              type="text"
-              name="address"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Your current location"
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* Profile Photo */}
-          <div>
-            <label className="block font-semibold mb-1">Profile Photo</label>
-            <input
-              type="file"
-              name="photo"
-              accept="image/*"
-              className="w-full"
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          {/* Bio / Description */}
-          <div>
-            <label className="block font-semibold mb-1">Short Bio</label>
-            <textarea
-              name="bio"
-              rows="4"
-              className="w-full border rounded-lg px-4 py-2"
-              placeholder="Tell us briefly about yourself..."
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-
-          {/* Submit Button */}
-          <button
-            type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition"
-          >
-            Submit Application
-          </button>
-
-        </form>
-      </div>
+      </form>
     </div>
   );
 };

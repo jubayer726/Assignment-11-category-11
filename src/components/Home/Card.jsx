@@ -1,49 +1,32 @@
-import { Link } from 'react-router'
+import { Link } from "react-router";
+import avatarImg from "../../assets/images/cart.jpg";
 
-const Card = () => {
+const Card = ({ stdn }) => {
+  const { title, image, subjects, salary, studentClass } = stdn;
   return (
     <Link
       to={`/plant/1`}
-      className='col-span-1 cursor-pointer group shadow-xl p-3 rounded-xl'
+      className="col-span-1 cursor-pointer group shadow-xl p-3 rounded-xl"
     >
-      <div className='flex flex-col gap-2 w-full'>
-        <div
-          className='
-              aspect-square 
-              w-full 
-              relative 
-              overflow-hidden 
-              rounded-xl
-            '
-        >
-          <img
-            className='
-                object-cover 
-                h-full 
-                w-full 
-                group-hover:scale-110 
-                transition
-              '
-            src='https://i.ibb.co.com/rMHmQP2/money-plant-in-feng-shui-brings-luck.jpg'
-            alt='Plant Image'
-          />
-          <div
-            className='
-              absolute
-              top-3
-              right-3
-            '
-          ></div>
-        </div>
-        <div className='font-semibold text-lg'>Money Plant</div>
-        <div className='font-semibold text-lg'>Category: Indoor</div>
-        <div className='font-semibold text-lg'>Quantity: 10</div>
-        <div className='flex flex-row items-center gap-1'>
-          <div className='font-semibold'> Price: 15$</div>
+      <div>
+        <img
+          src={image && image ? image : avatarImg}
+          alt=""
+          className="w-full h-40 object-cover rounded-lg"
+        />
+
+        <h3 className="text-lg font-semibold mt-4">{title}</h3>
+        <p className="text-gray-600 text-sm">Subject: {subjects}- {studentClass}</p>
+
+        <div className="flex justify-between items-center mt-4">
+          <p className="font-bold text-indigo-600">tk{salary}/month</p>
+          <button className="px-3 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700">
+            View Details
+          </button>
         </div>
       </div>
     </Link>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
