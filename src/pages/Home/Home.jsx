@@ -1,6 +1,7 @@
 import HeroSection from '../../components/Home/HeroSection/HeroSection'
 import OurTutors from '../../components/Home/OurTutors/OurTutors'
 import Tuitions from '../../components/Home/Tuitions';
+import TutorList from '../TutorSection/TutorList';
 
 
 const toutorsPromise = fetch('./tutors.json').then(res=>res.json());
@@ -9,6 +10,7 @@ const Home = () => {
     <div>
       <HeroSection/>
       <Tuitions/>
+      <TutorList></TutorList>
       <OurTutors toutorsPromise={toutorsPromise}/>
     </div>
   )

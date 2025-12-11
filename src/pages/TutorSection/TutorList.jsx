@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { Link } from "react-router";
 
-const TuisorSection = () => {
+
+const TutorList = () => {
+
   const { data: tutors = [], isLoading } = useQuery({
-    queryKey: ["tuitions"],
+    queryKey: ["tutors"],
     queryFn: async () => {
-      const res = await axios.get("http://localhost:3000/available-tutors");
+      const res = await axios.get("http://localhost:3000/tutors");
       return res.data;
     },
   });
@@ -44,10 +46,10 @@ const TuisorSection = () => {
               <h3 className="text-xl font-bold mt-4">{tutor.name}</h3>
 
               <p className="text-gray-600 text-sm mt-1">
-                Subject: <span className="font-medium">Subject: {tutor.subjects}</span>
+                Subject: <span className="font-medium">{tutor.subjects}</span>
               </p>
 
-              <p className="text-gray-600 text-sm">Location: {tutor.address}</p>
+              <p className="text-gray-600 text-sm">{tutor.address}</p>
 
               {/* Rating */}
               <p className="text-yellow-500 font-semibold mt-2">
@@ -61,9 +63,12 @@ const TuisorSection = () => {
             </div>
           ))}
         </div>
+        <div className='flex justify-center'>
+        <Link to ='/tutors' className='btn p-5 m-10 bg-info text-white font-bold'>Show More</Link>
+      </div>
       </div>
     </div>
   );
 };
 
-export default TuisorSection;
+export default TutorList;

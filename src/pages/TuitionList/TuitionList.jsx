@@ -1,46 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import avatarImg from "../../assets/images/cart.jpg";
 import { Link } from "react-router";
 
 const TuisionList = () => {
-  //   const tuitions = [
-  //   {
-  //     id: 1,
-  //     title: "Math Tuition for Class 8",
-  //     subject: "Mathematics",
-  //     level: "Class 8",
-  //     price: "$20/hr",
-  //     img: "https://i.ibb.co/5Wc6hK4/tutor1.png",
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "English Grammar Tuition",
-  //     subject: "English",
-  //     level: "Class 6-10",
-  //     price: "$18/hr",
-  //     img: "https://i.ibb.co/V99RRfZ/tutor2.png",
-  //   },
-  //   {
-  //     id: 3,
-  //     title: "Physics Advanced Tuition",
-  //     subject: "Physics",
-  //     level: "Class 9-12",
-  //     price: "$25/hr",
-  //     img: "https://i.ibb.co/rmShxmm/tutor3.png",
-  //   },
-  //   {
-  //     id: 4,
-  //     title: "Bangla Language Tuition",
-  //     subject: "Bangla",
-  //     level: "Primary-High School",
-  //     price: "$15/hr",
-  //     img: "https://i.ibb.co/k5bVRw0/tutor4.png",
-  //   },
-  // ];
-
   const { data: tuitions = [], isLoading } = useQuery({
     queryKey: ["tuitions"],
     queryFn: async () => {

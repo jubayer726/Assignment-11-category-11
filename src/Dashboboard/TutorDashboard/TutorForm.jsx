@@ -77,8 +77,8 @@ const TutorForm = () => {
         <div>
           <label className="font-medium">Phone</label>
           <input
-            type="text"
-            {...register("image", { required: true })}
+            type="number"
+            {...register("phone", { required: true })}
             className="border p-3 rounded w-full"
             placeholder="017XXXXXXXX"
           />
