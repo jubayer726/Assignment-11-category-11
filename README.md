@@ -36,7 +36,7 @@ Students can post tuition requirements, tutors can apply for tuitions, and admin
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/eTuitionBd.git
+git clone https://github.com/jubayer726/Assignment-11-category-11.git
 cd eTuitionBd
 npm install
 npm run dev

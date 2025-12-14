@@ -6,13 +6,14 @@ import LoadingSpinner from '../Shared/LoadingSpinner'
 import { Link } from 'react-router'
 
 const Tuitions = () => {
-    const {data: tuitions = [], isLoading} = useQuery({
-    queryKey: ['tuitions'],
-    queryFn: async () =>{
-     const res = await axios.get('http://localhost:3000/tuitions')
-      return res.data;
-    }
-  })
+  const { data: tuitions = [], isLoading} = useQuery({
+  queryKey: ["approvedTuitions"],
+  queryFn: async () => {
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_URL}/tuitions/approved`);
+    return res.data;
+      },
+    });
   if(isLoading) <LoadingSpinner></LoadingSpinner>
 
   return (

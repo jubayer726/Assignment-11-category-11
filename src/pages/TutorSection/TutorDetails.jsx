@@ -111,7 +111,7 @@ import useAuth from "../../hooks/useAuth";
 
       {/* Apply Button */}
       <div className="mt-8 text-center">
-        <button onClick={handlePayment} className="btn btn-primary btn-wide text-lg">Pay & Apply</button>
+        <button onClick={handlePayment} className="btn btn-primary btn-wide text-lg"> Accept & Pay</button>
       </div>
     </div>
   );

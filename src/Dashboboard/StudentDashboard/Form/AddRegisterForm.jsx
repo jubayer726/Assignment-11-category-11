@@ -1,32 +1,37 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
-import useAuth from './../../../hooks/useAuth';
+import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 
 const AddRegisterForm = () => {
-  const {user} = useAuth();
-  const [formData, setFormData] = useState({
-    title: "",
-    studentClass: "",
-    subjects: "",
-    salary: "",
-    location: "",
-    daysPerWeek: "",
-    description: "",
-    name: user.displayName,
-    image: user.photoURL
-  });
+  const { user } = useAuth();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
+    const tuitionData = {
+      ...data,
+      email: user.email,
+      name: user.displayName,
+      image: user.photoURL,
+      status: "pending",
+    };
+
     try {
-      const res = await axios.post("http://localhost:3000/tuitions", formData);
-      console.log(res.data);
-      toast.success("Tuition Post Submitted Successfully!");
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/tuitions`,
+        tuitionData
+      );
+
+      if (res.data.insertedId) {
+        toast.success("Tuition Post Submitted Successfully!");
+        reset();
+      }
     } catch (error) {
       console.error(error);
       toast.error("Failed to submit!");
@@ -37,31 +42,21 @@ const AddRegisterForm = () => {
     <div className="max-w-xl mx-auto bg-white p-8 shadow-lg rounded-lg">
       <h2 className="text-2xl font-bold mb-4">Post a Tuition</h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
+        {/* Title */}
         <input
+          {...register("title", { required: true })}
           type="text"
-          name="title"
           placeholder="Tuition Title"
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         />
+        {errors.title && <p className="text-red-500">Title is required</p>}
 
-        {/* <input
-          type="text"
-          name="studentClass"
-          placeholder="Student Class (e.g. Class 8)"
-          className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
-        />
-         */}
+        {/* Class */}
         <select
-          name="studentClass"
+          {...register("studentClass", { required: true })}
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         >
           <option value="">Select Class</option>
           <option value="Class Five">Class Five</option>
@@ -70,57 +65,74 @@ const AddRegisterForm = () => {
           <option value="Class Eight">Class Eight</option>
           <option value="Class Nine">Class Nine</option>
           <option value="Class Ten">Class Ten</option>
+          <option value="Class Eleven">Class Eleven</option>
+          <option value="Class Twelve">Class Twelve</option>
         </select>
+        {errors.studentClass && (
+          <p className="text-red-500">Class is required</p>
+        )}
 
+        {/* Subjects */}
         <input
+          {...register("subjects", { required: true })}
           type="text"
-          name="subjects"
           placeholder="Subjects (e.g. Math, English)"
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         />
+        {errors.subjects && (
+          <p className="text-red-500">Subjects are required</p>
+        )}
 
+        {/* Salary */}
         <input
+          {...register("salary", { required: true })}
           type="number"
-          name="salary"
           placeholder="Salary (BDT)"
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         />
+        {errors.salary && (
+          <p className="text-red-500">Salary is required</p>
+        )}
 
+        {/* Location */}
         <input
+          {...register("location", { required: true })}
           type="text"
-          name="location"
           placeholder="Location (e.g. Mirpur-10)"
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         />
+        {errors.location && (
+          <p className="text-red-500">Location is required</p>
+        )}
 
+        {/* Days per week */}
         <input
+          {...register("daysPerWeek", { required: true })}
           type="text"
-          name="daysPerWeek"
           placeholder="Days per week (e.g. 3 days)"
           className="w-full border px-4 py-2 rounded"
-          onChange={handleChange}
-          required
         />
+        {errors.daysPerWeek && (
+          <p className="text-red-500">Days per week required</p>
+        )}
 
+        {/* Description */}
         <textarea
-          name="description"
+          {...register("description", { required: true })}
           placeholder="Write description..."
           className="w-full border px-4 py-2 rounded"
           rows="4"
-          onChange={handleChange}
-          required
         />
+        {errors.description && (
+          <p className="text-red-500">Description is required</p>
+        )}
 
-        <button type="submit" className="w-full bg-indigo-600 text-white py-2 rounded">
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white py-2 rounded"
+        >
           Submit Tuition
         </button>
-        
       </form>
     </div>
   );

@@ -143,7 +143,7 @@ const DashBoard = () => {
                   </Link>
                 </li> */}
 
-                <NavLink to="/dashboard/admin-dashboard" className={({isActive})=> isActive? "bg-gray-300" : ""}>
+                <NavLink to="/dashboard" className={({isActive})=> isActive? "bg-gray-300" : ""}>
                   <h2
                     
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"

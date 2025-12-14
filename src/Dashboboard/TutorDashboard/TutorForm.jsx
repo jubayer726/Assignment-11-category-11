@@ -2,8 +2,10 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
 const TutorForm = () => {
+  const {user} = useAuth();
   const { register, handleSubmit, formState: { errors }, reset} = useForm();
 
   const [loading, setLoading] = useState(false);
@@ -25,6 +27,7 @@ const TutorForm = () => {
       const tutorData = {
         ...data,
         photo: photoURL,
+        email: user.email,
       };
 
       console.log("Final Tutor Data:", tutorData);
@@ -63,7 +66,7 @@ const TutorForm = () => {
         </div>
 
         {/* Email */}
-        <div>
+        {/* <div>
           <label className="font-medium">Email</label>
           <input
             type="email"
@@ -72,7 +75,7 @@ const TutorForm = () => {
             placeholder="Your email"
           />
           {errors.email && <p className="text-red-500 text-sm">Email is required</p>}
-        </div>
+        </div> */}
 
         {/* Phone */}
         <div>
@@ -99,7 +102,7 @@ const TutorForm = () => {
         </div>
 
         {/* Qualification */}
-        <div className="md:col-span-2">
+        <div>
           <label className="font-medium">Highest Qualification</label>
           <input
             {...register("qualification", { required: true })}

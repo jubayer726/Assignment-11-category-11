@@ -2,16 +2,14 @@ import Home from '../pages/Home/Home'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
-// import PlantDetails from '../pages/PlantDetails/PlantDetails'
 import PrivateRoute from './PrivateRoute'
-// import DashboardLayout from '../layouts/DashboardLayout'
-import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
+// import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import Profile from '../pages/Dashboard/Common/Profile'
-import Statistics from '../pages/Dashboard/Common/Statistics'
+// import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
-import MyInventory from '../pages/Dashboard/Seller/MyInventory'
-import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
-import MyOrders from '../pages/Dashboard/Customer/MyOrders'
+// import MyInventory from '../pages/Dashboard/Seller/MyInventory'
+// import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
+// import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
 import About from '../pages/About/About'
 import Contact from '../pages/Contact/Contact'
@@ -56,10 +54,6 @@ export const router = createBrowserRouter([
         path: 'contact',
         element: <Contact />,
       },
-      // {
-      //   path: '/plant/:id',
-      //   element: <PlantDetails />,
-      // },
       {
         path: '/tuition/:id',
         element: <TuitionDetails/>
@@ -89,16 +83,24 @@ export const router = createBrowserRouter([
     path: '/dashboard',
     element: (
       <PrivateRoute>
-        {/* <DashboardLayout /> */}
         <DashBoard/>
       </PrivateRoute>
     ),
     children: [
+      // {
+      //   index: true,
+      //   element: (
+      //     <PrivateRoute>
+      //       <Statistics />
+      //     </PrivateRoute>
+      //   ),
+      // },
       {
         index: true,
+        // path: 'admin-dashboard',
         element: (
           <PrivateRoute>
-            <Statistics />
+            <AdminDashboard/>
           </PrivateRoute>
         ),
       },
@@ -148,14 +150,6 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <TutorForm/>
-          </PrivateRoute>
-        ),
-      },
-       {
-        path: 'admin-dashboard',
-        element: (
-          <PrivateRoute>
-            <AdminDashboard/>
           </PrivateRoute>
         ),
       },
