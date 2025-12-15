@@ -19,7 +19,7 @@ import useAuth from "../../hooks/useAuth";
       if(isLoading) return <LoadingSpinner/>
    
      const {_id, name, phone, address, subjects, price, qualification, photo, email} = tutor || {};
-
+     
      const handlePayment = async () =>{
       const paymentInfo = {
         tutorId: _id,
