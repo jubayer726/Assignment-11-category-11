@@ -9,10 +9,6 @@ import useAuth from "../../hooks/useAuth";
 
 const TuitionDetails = () =>{
   const { user } = useAuth();
-  // const [expectedSalary, setExpectedSalary] = useState("");
-  // const [message, setMessage] = useState("");
-
-  //-----------------
 
     const {id} = useParams();
     const navigate = useNavigate()
@@ -25,24 +21,23 @@ const TuitionDetails = () =>{
       }
 
     })
-    if(isLoading) return <LoadingSpinner/>
-   const {name, studentClass, location, subjects, salary, daysPerWeek, image, description} = student;
+  
+   const {name, email, studentClass, location, subjects, salary, daysPerWeek, image, description} = student;
 
-   const handleDelete = async () => {
-    const confirm = window.confirm("Are you sure you want to delete this tuition?");
-    if (!confirm) return;
+  //  const handleDelete = async () => {
+  //   const confirm = window.confirm("Are you sure you want to delete this tuition?");
+  //   if (!confirm) return;
 
-    try {
-      await axios.delete(`${import.meta.env.VITE_API_URL}/tuitions/${id}`);
-      toast.success("Tuition Deleted Successfully!");
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to delete tuition");
-    }
-  };
+  //   try {
+  //     await axios.delete(`${import.meta.env.VITE_API_URL}/tuitions/${id}`);
+  //     toast.success("Tuition Deleted Successfully!");
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Failed to delete tuition");
+  //   }
+  // };
 
-//-------------------
   const handleApply = async () => {
     const applicationData = {
       tuitionId: student._id,
@@ -68,6 +63,7 @@ const TuitionDetails = () =>{
       toast.error("Failed to apply");
     }
   };
+    if(isLoading) return <LoadingSpinner/>
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -89,6 +85,7 @@ const TuitionDetails = () =>{
          alt="Sudent Photo" className="w-40 h-48 object-cover rounded-lg"/></div>
          <div>
            <p><strong>Name:</strong> {name}</p>
+           <p><strong>Email:</strong> {email}</p>
           <p><strong>Class:</strong> {studentClass}</p>
           <p><strong>School:</strong> Dhanmondi Govt. School</p>
          </div>
@@ -127,8 +124,8 @@ const TuitionDetails = () =>{
       {/* Buttons */}
       <div className="mt-8 flex justify-center gap-4">
         <button onClick={handleApply} className="btn btn-info"> Apply Now</button>
-        <button  onClick={() => navigate(`/update-tuition/${id}`)} className="btn btn-primary">Edit Details</button>
-        <button onClick={handleDelete} className="btn btn-secondary">Delete Post</button>
+        {/* <button  onClick={() => navigate(`/update-tuition/${id}`)} className="btn btn-primary">Edit Details</button>
+        <button onClick={handleDelete} className="btn btn-secondary">Delete Post</button> */}
         
       </div>
 

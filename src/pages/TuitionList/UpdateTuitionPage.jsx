@@ -43,7 +43,7 @@ const UpdateTuition = () => {
       <h2 className="text-2xl font-bold mb-4">Update Tuition</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        <input {...register("name")} className="input input-bordered w-full" placeholder="Student Name" />
+        <input {...register("name")} defaultValue={tuition.name} className="input input-bordered w-full" placeholder="Student Name" />
         <input {...register("studentClass")} className="input input-bordered w-full" placeholder="Class" />
         <input {...register("subjects")} className="input input-bordered w-full" placeholder="Subjects" />
         <input {...register("location")} className="input input-bordered w-full" placeholder="Location" />

@@ -65,8 +65,8 @@ const AddRegisterForm = () => {
           <option value="Class Eight">Class Eight</option>
           <option value="Class Nine">Class Nine</option>
           <option value="Class Ten">Class Ten</option>
-          <option value="Class Eleven">Class Eleven</option>
-          <option value="Class Twelve">Class Twelve</option>
+          <option value="S.S.C">S.S.C</option>
+          <option value="H.S.C">H.S.C</option>
         </select>
         {errors.studentClass && (
           <p className="text-red-500">Class is required</p>
@@ -87,7 +87,7 @@ const AddRegisterForm = () => {
         <input
           {...register("budget", { required: true })}
           type="number"
-          placeholder="Budget (BDT)"
+          placeholder="Budget (USD)"
           className="w-full border px-4 py-2 rounded"
         />
         {errors.budget && (

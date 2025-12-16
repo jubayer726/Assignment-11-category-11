@@ -3,13 +3,8 @@ import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
 import SignUp from '../pages/SignUp/SignUp'
 import PrivateRoute from './PrivateRoute'
-// import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import Profile from '../pages/Dashboard/Common/Profile'
-// import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
-// import MyInventory from '../pages/Dashboard/Seller/MyInventory'
-// import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
-// import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
 import About from '../pages/About/About'
 import Contact from '../pages/Contact/Contact'
@@ -26,6 +21,9 @@ import TutorDetails from '../pages/TutorSection/TutorDetails'
 import UpdateTuition from '../pages/TuitionList/UpdateTuitionPage'
 import PaymentSuccess from '../pages/Payments/PaymentSuccess'
 import PayemtCancel from '../pages/Payments/PayemtCancel'
+import UpdateProfile from '../pages/Dashboard/Common/UpdateProfile'
+import MyTuitions from '../Dashboboard/StudentDashboard/MyTuitions'
+import EditTuition from '../Dashboboard/StudentDashboard/EditTuition'
 
 
 export const router = createBrowserRouter([
@@ -62,10 +60,10 @@ export const router = createBrowserRouter([
         path: '/tutor/:id',
         element: <TutorDetails/>
       },
-      {
-        path: '/update-tuition/:id',
-        element: <UpdateTuition/>
-      },
+      // {
+      //   path: '/update-tuition/:id',
+      //   element: <UpdateTuition/>
+      // },
       {
         path: '/payment-success',
         element: <PaymentSuccess/>
@@ -120,14 +118,22 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: 'my-inventory',
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyInventory />
-      //     </PrivateRoute>
-      //   ),
+      {
+        path: 'my-tuition',
+        element: (
+          <PrivateRoute>
+            <MyTuitions />
+          </PrivateRoute>
+        ),
+      },
+      //  {
+      //   path: 'update-tuition/:id',
+      //   element: <UpdateTuition/>
       // },
+      {
+        path: 'edit-tuition/:id',
+        element: <EditTuition/>
+      },
       // {
       //   path: 'manage-users',
       //   element: (
@@ -161,14 +167,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      // {
-      //   path: 'my-orders',
-      //   element: (
-      //     <PrivateRoute>
-      //       <MyOrders />
-      //     </PrivateRoute>
-      //   ),
-      // },
+      {
+        path: 'update-profile',
+        element: (
+          <PrivateRoute>
+            <UpdateProfile/>
+          </PrivateRoute>
+        ),
+      },
       // {
       //   path: 'manage-orders',
       //   element: <ManageOrders />,

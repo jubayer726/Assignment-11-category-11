@@ -6,10 +6,16 @@ import { PiStudentBold } from "react-icons/pi";
 import { Link, NavLink, Outlet } from "react-router";
 import { FaTasks } from "react-icons/fa";
 import { GiTeacher } from "react-icons/gi";
+import useAuth from "../hooks/useAuth";
+import { FiLogOut } from "react-icons/fi";
+import { MdOutlineEditNotifications } from "react-icons/md";
+
 
 
 const DashBoard = () => {
+   const { logOut } = useAuth()
   //   const {role} = useRole()
+
   return (
     <div className="drawer lg:drawer-open w-7xl mx-auto">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -77,16 +83,30 @@ const DashBoard = () => {
                 <span className="is-drawer-close:hidden">Homepage</span>
               </Link>
             </li>
-            {/* List item */}
+            
+            {/* Student Dashboard */}
             <NavLink  to="/dashboard/student-dashboard" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
               <h2
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
-                data-tip="My-Tuitions"
+                data-tip="Student Dashboard"
               >
                 <PiStudentBold />
-                <span className="is-drawer-close:hidden">My Tuitions</span>
+                <span className="is-drawer-close:hidden">Student Dashboard</span>
               </h2>
             </NavLink>
+
+               {/* My Tuition  */}
+             <NavLink to="/dashboard/my-tuition" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
+              
+              <h2
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
+                data-tip="My Tuition"
+              >
+                <MdOutlineEditNotifications />
+                <span className="is-drawer-close:hidden">My Tuition</span>
+              </h2>
+            </NavLink>
+
             <NavLink to="/dashboard/student-form" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
               
               <h2
@@ -97,6 +117,8 @@ const DashBoard = () => {
                 <span className="is-drawer-close:hidden">Post New Tuition</span>
               </h2>
             </NavLink>
+
+             
             {/* Assign Rider Role */}
             {
               // role === 'rider' && <>
@@ -184,6 +206,16 @@ const DashBoard = () => {
                 </h2>
               </button>
             </NavLink>
+              {/* Logout */}
+              <li>
+              <button  onClick={logOut}
+                className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
+                data-tip="Log-Out"
+              >
+                <FiLogOut />
+                <span className="is-drawer-close:hidden">Log-Out</span>
+              </button>
+            </li>
           </ul>
         </div>
       </div>

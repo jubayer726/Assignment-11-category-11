@@ -84,7 +84,7 @@ const StudentDashboard = () => {
         <h2 className="text-2xl font-bold mb-4 p-5">My Approved Tuitions</h2>
         <div className="overflow-x-auto">
           <table className="table table-zebra">
-            {/* head */}
+            
             <thead>
               <tr>
                 <th></th>
