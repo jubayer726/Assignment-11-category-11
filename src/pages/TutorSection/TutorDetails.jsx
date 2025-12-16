@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useParams } from "react-router";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
-import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
 
  const TutorDetails= () =>{
-  const {user} = useAuth();
+ 
   const {id} = useParams();
 
       const {data: tutor = {}, isLoading} = useQuery({
@@ -20,25 +20,8 @@ import useAuth from "../../hooks/useAuth";
    
      const {_id, name, phone, address, subjects, price, qualification, photo, email} = tutor || {};
      
-     const handlePayment = async () =>{
-      const paymentInfo = {
-        tutorId: _id,
-        name, 
-        photo,
-        subjects,
-        address,
-        qualification,
-        email,
-        quantity: 1,
-        price,
-        student: {
-          name: user?.displayName,
-          email: user?.email,
-          image: user?.photoURL,
-        }
-      }
-      const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/create-checkout-session`, paymentInfo )
-      window.location.href = data.url;
+     const handleApply = async () =>{
+      toast.success("Applycation send to The Tutor")
      }
 
   return (
@@ -111,7 +94,7 @@ import useAuth from "../../hooks/useAuth";
 
       {/* Apply Button */}
       <div className="mt-8 text-center">
-        <button onClick={handlePayment} className="btn btn-primary btn-wide text-lg"> Accept & Pay</button>
+        <button onClick={handleApply} className="btn btn-primary btn-wide text-lg"> Apply</button>
       </div>
     </div>
   );

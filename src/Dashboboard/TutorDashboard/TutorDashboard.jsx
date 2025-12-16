@@ -1,20 +1,38 @@
-const TutorDashboard = () => {
-  return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      
-      <h2 className="text-2xl font-bold mb-6">Tutor Dashboard</h2>
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import useAuth from "../../hooks/useAuth";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
-      {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+const TutorDashboard = () => {
+  const { user } = useAuth();
+
+  const { data: applications = [], isLoading } = useQuery({
+    queryKey: ["myApplications", user?.email],
+    queryFn: async () => {
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/applications?email=${user.email}`
+      );
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
+
+  if (isLoading) return <LoadingSpinner />;
+
+  return (
+    <div className="p-6">
+      <h2 className="text-2xl font-bold mb-4">My Applied Tuitions</h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         
         <div className="bg-white p-6 rounded-xl shadow">
-          <h3 className="text-xl font-bold">Approved Tuitions</h3>
-          <p className="text-3xl text-green-600 font-bold mt-2">08</p>
+          <h3 className="text-xl font-bold">Accepted Tuitions</h3>
+          <p className="text-3xl text-green-600 font-bold mt-2">02</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
           <h3 className="text-xl font-bold">Pending Applications</h3>
-          <p className="text-3xl text-yellow-600 font-bold mt-2">03</p>
+          <p className="text-3xl text-yellow-600 font-bold mt-2">01</p>
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow">
@@ -24,38 +42,50 @@ const TutorDashboard = () => {
 
       </div>
 
-      {/* Approved Tuition List */}
-      <div className="bg-white p-6 rounded-xl shadow mb-8">
-        <h3 className="text-xl font-bold mb-4">Your Approved Tuitions</h3>
+      {applications.length === 0 ? (
+        <p>No applications found.</p>
+      ) : (
+        <div className="grid md:grid-cols-2 gap-4">
+          {applications.map((app) => (
+            <div
+              key={app._id}
+              className="border rounded-lg p-4 shadow bg-white"
+            >
+              <h3 className="text-lg font-semibold">
+                {app.tuitionTitle}
+              </h3>
 
-        <div className="space-y-4">
-          <div className="flex justify-between bg-gray-50 p-4 rounded-lg">
-            <span>Physics - Class 10</span>
-            <button className="text-indigo-600">Manage</button>
-          </div>
-          <div className="flex justify-between bg-gray-50 p-4 rounded-lg">
-            <span>Math - Class 8</span>
-            <button className="text-indigo-600">Manage</button>
-          </div>
+              <p>
+                <strong>Student:</strong> {app.studentName}
+              </p>
+
+              <p>
+                <strong>Expected Salary:</strong> {app.expectedSalary} BDT
+              </p>
+
+              <p>
+                <strong>Status:</strong>{" "}
+                <span
+                  className={`font-semibold ${
+                    app.status === "pending"
+                      ? "text-yellow-500"
+                      : app.status === "accepted"
+                      ? "text-green-600"
+                      : "text-red-500"
+                  }`}
+                >
+                  {app.status}
+                </span>
+              </p>
+
+              <p className="text-sm text-gray-500 mt-1">
+                Applied on:{" "}
+                {new Date(app.appliedAt).toLocaleDateString()}
+              </p>
+            </div>
+          ))}
         </div>
-      </div>
-
-      {/* Class Schedule */}
-      <div className="bg-white p-6 rounded-xl shadow">
-        <h3 className="text-xl font-bold mb-4">Today's Classes</h3>
-
-        <ul className="space-y-3">
-          <li className="flex justify-between p-4 bg-gray-50 rounded-lg">
-            <span>Math Class — 4:00 PM</span>
-            <span className="text-green-600 font-medium">Upcoming</span>
-          </li>
-          <li className="flex justify-between p-4 bg-gray-50 rounded-lg">
-            <span>Physics Class — 7:00 PM</span>
-            <span className="text-yellow-600 font-medium">Pending</span>
-          </li>
-        </ul>
-      </div>
-
+      )}
     </div>
   );
 };
