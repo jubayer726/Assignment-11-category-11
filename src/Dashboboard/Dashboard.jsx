@@ -10,12 +10,14 @@ import useAuth from "../hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 import { MdOutlineEditNotifications, MdOutlineSignpost} from "react-icons/md";
 import { TbReportMoney } from "react-icons/tb";
+import useRole from "../hooks/useRole";
 
 
 
 const DashBoard = () => {
    const { logOut } = useAuth()
-  //   const {role} = useRole()
+    const {role} = useRole()
+    console.log(role);
 
   return (
     <div className="drawer lg:drawer-open w-7xl mx-auto">
