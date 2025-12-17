@@ -3,9 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const StudentDashboard = () => {
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   const { data: tuitions = [], refetch } = useQuery({
     queryKey: ["studentTuitions", user?.email],
@@ -71,8 +73,7 @@ const StudentDashboard = () => {
     queryKey: ["paymentHistory", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axios.get(
-        `${import.meta.env.VITE_API_URL}/orders/student/${user.email}`
+      const res = await axiosSecure.get(`/orders/student`
       );
       return res.data;
     },

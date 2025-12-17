@@ -13,11 +13,10 @@ import { TbReportMoney } from "react-icons/tb";
 import useRole from "../hooks/useRole";
 
 
-
 const DashBoard = () => {
    const { logOut } = useAuth()
     const {role} = useRole()
-    console.log(role);
+
 
   return (
     <div className="drawer lg:drawer-open w-7xl mx-auto">
@@ -88,6 +87,7 @@ const DashBoard = () => {
             </li>
             
             {/* Student Dashboard */}
+            {role === "student" && <>
             <NavLink  to="/dashboard/student-dashboard" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
               <h2
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
@@ -97,9 +97,8 @@ const DashBoard = () => {
                 <span className="is-drawer-close:hidden">Student Dashboard</span>
               </h2>
             </NavLink>
-
                {/* My Tuition  */}
-             <NavLink to="/dashboard/my-tuition" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
+            <NavLink to="/dashboard/my-tuition" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
               
               <h2
                 className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
@@ -109,7 +108,7 @@ const DashBoard = () => {
                 <span className="is-drawer-close:hidden">My Tuition</span>
               </h2>
             </NavLink>
-
+            
             <NavLink to="/dashboard/student-form" className={({ isActive }) =>isActive? "bg-gray-300": "" }>
               
               <h2
@@ -120,11 +119,11 @@ const DashBoard = () => {
                 <span className="is-drawer-close:hidden">Post New Tuition</span>
               </h2>
             </NavLink>
-
+            </>
+            }
              
-            {/* Assign Rider Role */}
             {
-              // role === 'rider' && <>
+              role === 'tutor' && <>
               <NavLink to="/dashboard/tutor-dashboard" className={({isActive})=> isActive? "bg-gray-300" : ""}>
                   
                 <h2
@@ -137,15 +136,8 @@ const DashBoard = () => {
                   </span>
                 </h2>
               </NavLink>
-              // </>
-            }
 
-            {/* Admin Role */}
-            {
-            // role === "admin" && 
-            (
-              <>
-                <NavLink to="/dashboard/tutor-form" className={({isActive})=> isActive? "bg-gray-300" : ""}>
+              <NavLink to="/dashboard/tutor-form" className={({isActive})=> isActive? "bg-gray-300" : ""}>
                   <h2
                     className="is-drawer-close:tooltip is-drawer-close:tooltip-right flex gap-1 p-1 items-center hover:bg-gray-200"
                     data-tip="Tutor-Form"
@@ -154,21 +146,15 @@ const DashBoard = () => {
                     <span className="is-drawer-close:hidden">Tutor Form</span>
                   </h2>
                 </NavLink>
+               </>
+            }
 
-                {/* <li>
-                  <Link
-                    to="/dashboard/assign-riders"
-                    className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
-                    data-tip="Assign-Riders"
-                  >
-                    <RiEBike2Fill />
-                    <span className="is-drawer-close:hidden">
-                      Assign Riders
-                    </span>
-                  </Link>
-                </li> */}
 
-                  {/* User Managemt */}
+            {
+            role === "admin" && 
+            (
+              <>
+                {/* User Managemt */}
                 <NavLink to="/dashboard/users-management" className={({isActive})=> isActive? "bg-gray-300" : ""}>
                   <h2
                     
