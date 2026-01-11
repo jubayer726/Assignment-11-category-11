@@ -45,7 +45,11 @@ const DashBoard = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4 text-2xl font-bold">eTutionBd Dashboard</div>
+          <div className="flex md:flex-row md:items-center ml-4">
+            <h2 className="text-purple-600 font-black text-2xl px-4">e<span className="text-[#165754]">Tuition</span>Bd</h2>
+            <h2 className="text-[#0b2b5c] font-black text-2xl">Dashboard</h2>
+          </div>
+          
         </nav>
         {/* Page content here */}
 

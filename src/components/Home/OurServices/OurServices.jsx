@@ -23,10 +23,15 @@ const OurServices = () => {
     { img:AdmissionTest, title: "Admission Test" },
   ];
   return (
-    <div>
-      <h1 className="text-3xl text-center font-bold pt-15 text-secondary">
-        We've helped thousands of sales teams
-      </h1>
+    <div className="max-w-7xl mx-auto px-6 bg-white py-20">
+      <div className="text-center mb-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0b2b5c]">
+            Our Services
+          </h2>
+          <p className="text-[#6b7da5] mt-3 text-lg">
+           Here are services we provide
+          </p>
+        </div>
       <div className="py-15">
         <Swiper
           slidesPerView={4}
@@ -38,6 +43,12 @@ const OurServices = () => {
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           modules={[Pagination, Autoplay]}
           className="mySwiper"
+
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+          }}
         >
           {services.map((service, i) => (
             <SwiperSlide key={i} className="shadow-sm bg-gray-50 rounded-lg">

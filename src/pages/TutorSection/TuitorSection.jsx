@@ -13,13 +13,15 @@ const TuisorSection = () => {
     },
   });
   if (isLoading) <LoadingSpinner></LoadingSpinner>;
+
+
   return (
     <div className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Meet Our Expert Tutors
+          <h2 className="text-3xl md:text-4xl font-bold text-purple-600">
+            Meet Our <span className="text-[#167570]">Expert Tutors</span>
           </h2>
           <p className="text-gray-600 mt-2">
             Highly qualified and experienced tutors ready to guide your learning
@@ -42,7 +44,7 @@ const TuisorSection = () => {
               />
 
               {/* Content */}
-              <h3 className="text-xl font-bold mt-4">{tutor.name}</h3>
+              <h3 className="text-xl font-bold mt-4 text-[#0b2b5c]">{tutor.name}</h3>
 
               <p className="text-gray-600 text-sm mt-1">
                 Subject: <span className="font-medium">Subject: {tutor.subjects}</span>
@@ -57,7 +59,8 @@ const TuisorSection = () => {
 
               {/* Button */}
               
-                <Link to={`/tutor/${tutor._id}`} className="mt-4 w-full py-2 btn bg-purple-600 text-white rounded-lg hover:bg-indigo-700">
+                <Link to={`/tutor/${tutor._id}`} className="mt-4 w-full py-2 btn bg-gradient-to-r from-[#8e0e7b] to-[#5c0a5f]
+         hover:from-[#a0148f] hover:to-[#6f0d72] transition-all duration-300 text-white rounded-lg">
                 View Profile
               </Link>
               

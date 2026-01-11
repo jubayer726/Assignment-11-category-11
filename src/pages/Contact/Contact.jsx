@@ -1,6 +1,16 @@
 import React from 'react';
+import toast from 'react-hot-toast';
+import { FaLocationDot } from "react-icons/fa6";
+import { IoCall } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
+
+
 
 const Contact = () => {
+  const handleSendMgs = () => {
+    toast.success("Message sent successfully!");
+  }
+
     return (
         <div>
             <section className="bg-gray-50 py-16 px-6 md:px-20">
@@ -8,18 +18,18 @@ const Contact = () => {
 
         {/* Left: Contact Info */}
         <div>
-          <h2 className="text-3xl md:text-4xl font-semibold text-[#0f172a] mb-6">
-            Contact Us
+          <h2 className="text-3xl md:text-4xl font-semibold text-purple-600 mb-6">
+            Contact <span className="text-[#167570]">Us</span>
           </h2>
 
-          <p className="text-gray-700 text-lg leading-7 mb-6">
+          <p className="text-gray-700 leading-7 mb-6">
             Have questions or need support? We're here to help students, tutors,
             and parents connect smoothly on eTuitionBd.
           </p>
 
-          <div className="space-y-5 text-gray-800 text-lg">
+          <div className="space-y-5 text-[#0b2b5c] text-lg">
             <div className="flex items-start space-x-3">
-              <span className="text-2xl">📍</span>
+              <span className="text-2xl"><FaLocationDot /></span>
               <p>
                 Mohakhali Dhaka-1200.<br />
                 Dhaka Bangladesh
@@ -27,12 +37,12 @@ const Contact = () => {
             </div>
 
             <div className="flex items-center space-x-3">
-              <span className="text-2xl">📞</span>
+              <span className="text-2xl"><IoCall /></span>
               <p>(+88) 01234567890</p>
             </div>
 
             <div className="flex items-center space-x-3">
-              <span className="text-2xl">📧</span>
+              <span className="text-2xl"><MdEmail /></span>
               <p>support@etuitionbd.com</p>
             </div>
           </div>
@@ -40,13 +50,13 @@ const Contact = () => {
 
         {/* Right: Contact Form */}
         <div className="bg-white shadow-md rounded-xl p-8">
-          <h3 className="text-2xl font-semibold text-[#0f172a] mb-6">
-            Send us a Message
+          <h3 className="text-2xl text-center font-bold text-purple-600 mb-6">
+            Send us <span className="text-[#167570]">Message</span>
           </h3>
 
           <form className="space-y-5">
             <div>
-              <label className="block text-gray-700 mb-1">Your Name</label>
+              <label className="block text-gray-800 mb-1">Your Name</label>
               <input
                 type="text"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2
@@ -56,7 +66,7 @@ const Contact = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Email Address</label>
+              <label className="block text-gray-800 mb-1">Email Address</label>
               <input
                 type="email"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2
@@ -66,7 +76,7 @@ const Contact = () => {
             </div>
 
             <div>
-              <label className="block text-gray-700 mb-1">Message</label>
+              <label className="block text-gray-800 mb-1">Message</label>
               <textarea
                 rows="4"
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2
@@ -76,8 +86,8 @@ const Contact = () => {
             </div>
 
             <button
-              type="submit"
-              className="w-full bg-blue-600 hover:bg-blue-700 transition text-white py-3 rounded-lg font-semibold"
+              onClick={handleSendMgs}
+              className="btn-primary w-full"
             >
               Send Message
             </button>

@@ -70,11 +70,21 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
+      <li>
+        <NavLink
+          to="/dashboard2"
+          className={({ isActive }) =>
+            isActive ? "border-b-3 border-blue-500" : ""
+          }
+        >
+          Dashboard2
+        </NavLink>
+      </li>
     </>
   );
 
   return (
-    <div className="bg-gradient-to-r from-[#e782e7] via-[#e669cb] to-[#e782e7] sticky top-0 z-50 shadow-sm">
+    <div className="bg-gradient-to-r from-[#f36af3] via-[#e669cb] to-[#f461f4] sticky top-0 z-50 shadow-sm">
         <div className="navbar w-11/12 mx-auto  sticky top-0 z-50">
           <div className="navbar-start">
           <div className="dropdown">

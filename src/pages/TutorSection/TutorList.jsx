@@ -19,7 +19,7 @@ const TutorList = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0b2b5c]">
             Meet Our Expert Tutors
           </h2>
           <p className="text-gray-600 mt-2">
@@ -42,7 +42,7 @@ const TutorList = () => {
               />
 
               {/* Content */}
-              <h3 className="text-xl font-bold mt-4">{tutor.name}</h3>
+              <h3 className="text-xl text-gr font-bold mt-4">{tutor.name}</h3>
 
               <p className="text-gray-600 text-sm mt-1">
                 Subject: <span className="font-medium">{tutor.subjects}</span>

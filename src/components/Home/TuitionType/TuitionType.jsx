@@ -23,7 +23,7 @@ export default function TuitionTypes() {
   return (
     <section className="py-16 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center text-slate-800">
+        <h2 className="text-4xl font-bold text-center text-[#0b2b5c]">
           Tuition Types
         </h2>
         <p className="text-center text-slate-500 mt-2">

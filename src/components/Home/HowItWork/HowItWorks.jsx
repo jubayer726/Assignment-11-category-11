@@ -38,7 +38,7 @@ const HowItWorks = () => {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-slate-800">
+          <h2 className="text-4xl font-bold text-[#0b2b5c]">
             How it Works?
           </h2>
           <p className="mt-3 text-lg text-gray-500">

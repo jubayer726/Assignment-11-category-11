@@ -40,8 +40,8 @@ const TuisionList = () => {
       <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
-            Tuition Listings
+          <h2 className="text-3xl md:text-4xl font-bold text-purple-600">
+            Tuition <span className="text-[#167570]">Listings</span> 
           </h2>
           <p className="text-gray-600 mt-2">
             Find the best tuition that matches your learning needs
@@ -56,11 +56,11 @@ const TuisionList = () => {
             placeholder="Search by subject or class..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="w-full md:w-1/2 px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full md:w-1/2 px-4 py-3 border border-purple-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
 
           {/*  Filters */}
-          <div className="flex gap-3 flex-wrap">
+          <div className="flex gap-3 flex-wrap text-[#167570] font-semibold">
             {["All", "Class Five", "Class Eight", "Class Ten", "H.S.C"].map(
               (cls) => (
                 <button
@@ -69,7 +69,7 @@ const TuisionList = () => {
                   className={`px-4 py-2 rounded-lg border
                     ${
                       filterClass === cls
-                        ? "bg-indigo-600 text-white"
+                        ? "bg-purple-600 text-white"
                         : "bg-white hover:bg-gray-100"
                     }`}
                 >
@@ -82,7 +82,7 @@ const TuisionList = () => {
 
         {/* Tuition Cards */}
         {filteredTuitions.length === 0 ? (
-          <p className="text-center text-gray-500">No tuition found 😔</p>
+          <p className="text-center text-purple-600">No tuition found 😔</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredTuitions.map((item) => (

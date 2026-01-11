@@ -1,10 +1,12 @@
 import { Link, useLocation, useNavigate } from "react-router";
+import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import useAuth from "../../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { imageUpload } from "../../Utils";
 import axios from "axios";
+import signupImg from "../../assets/images/signin.png";
 
 const SignUp = () => {
   const { createUser, updateUserProfile, signInWithGoogle } = useAuth();
@@ -13,7 +15,11 @@ const SignUp = () => {
   const from = location.state || "/";
 
   // React Hook Form
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   // console.log(errors);
   const onSubmit = async (data) => {
     const { name, role, image, email, password } = data;
@@ -30,14 +36,15 @@ const SignUp = () => {
         email: data.email,
         displayName: data.name,
         role: data.role,
-        photoURL: photoURL
-      }
-      axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
-      .then(result=>{
-        if(result.data.insertedId){
-          console.log('user created in the database');
-        }
-      })
+        photoURL: photoURL,
+      };
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+        .then((result) => {
+          if (result.data.insertedId) {
+            console.log("user created in the database");
+          }
+        });
       // Save username & profile photo
       await updateUserProfile(name, photoURL, role);
 
@@ -54,21 +61,21 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     try {
       //User Registration using google
-      await signInWithGoogle()
-      .then(result=>{
+      await signInWithGoogle().then((result) => {
         console.log(result.user);
         const userInfo = {
           email: result.user.email,
           displayName: result.user.displayName,
           photoURL: result.user.photoURL,
-          role: 'student',
-        }
-        axios.post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
-        .then(result=>{
-          console.log(result.data);
-           navigate(from, { replace: true });
-        })
-      })
+          role: "student",
+        };
+        axios
+          .post(`${import.meta.env.VITE_API_URL}/users`, userInfo)
+          .then((result) => {
+            console.log(result.data);
+            navigate(from, { replace: true });
+          });
+      });
 
       navigate(from, { replace: true });
       toast.success("Signup Successful");
@@ -78,10 +85,32 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white">
+    <motion.div
+      initial={{ opacity: 0, x: -80 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true }}
+      className="flex justify-center items-center gap-24 min-h-screen bg-white"
+    >
+      <div>
+        <motion.img
+          src={signupImg}
+          alt="Floating Image"
+          className="w-full max-w-md mx-auto hidden lg:block"
+          animate={{ y: [0, -20, 0] }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-4 text-center">
-          <h1 className="my-2 text-4xl font-bold">Sign Up</h1>
+          <h1 className="my-2 text-4xl font-bold text-purple-600">
+            Sign <span className="text-[#167570]">Up</span>
+          </h1>
           <p className="text-sm text-gray-400">Welcome to eTutionBd</p>
         </div>
         <form
@@ -99,7 +128,7 @@ const SignUp = () => {
                 type="text"
                 id="name"
                 placeholder="Enter Your Name Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-purple-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("name", {
                   required: "Name is required",
@@ -109,7 +138,9 @@ const SignUp = () => {
                   },
                 })}
               />
-              {errors.name && (<p className="text-red-500 text-xs mt-1">{errors.name.message}
+              {errors.name && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.name.message}
                 </p>
               )}
             </div>
@@ -122,7 +153,7 @@ const SignUp = () => {
                 type="number"
                 id="mobile"
                 placeholder="Enter Your Mobile Number Here"
-                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900"
+                className="w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-purple-600 bg-gray-200 text-gray-900"
                 data-temp-mail-org="0"
                 {...register("mobile", {
                   required: "Mobile Number is required",
@@ -132,7 +163,9 @@ const SignUp = () => {
                   },
                 })}
               />
-              {errors.mobile && (<p className="text-red-500 text-xs mt-1">{errors.mobile.message}
+              {errors.mobile && (
+                <p className="text-red-500 text-xs mt-1">
+                  {errors.mobile.message}
                 </p>
               )}
             </div>
@@ -153,7 +186,7 @@ const SignUp = () => {
                     file:mr-4 file:py-2 file:px-4
                     file:rounded-md file:border-0
                     file:text-sm file:font-semibold
-                    file:bg-lime-50 file:text-lime-700
+                    file:bg-lime-50 file:text-purple-600
                     hover:file:bg-lime-100
                     bg-gray-100 border border-dashed border-lime-300 rounded-md cursor-pointer
                     focus:outline-none focus:ring-2 focus:ring-lime-400 focus:border-lime-400
@@ -166,22 +199,21 @@ const SignUp = () => {
             </div>
 
             {/* Add role */}
-            <div className='space-y-1 text-sm'>
-              <label htmlFor='role' className='block text-gray-600 '>
+            <div className="space-y-1 text-sm">
+              <label htmlFor="role" className="block text-gray-600 ">
                 Add Role
               </label>
               <select
-                {...register("role", {required: "Role is required"})}
-                className='w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-gray-200'
+                {...register("role", { required: "Role is required" })}
+                className="w-full px-4 py-3 border-lime-300 focus:outline-lime-500 rounded-md bg-gray-200"
               >
-                <option value='student'>student</option>
-                <option value='tutor'>tutor</option>
-                
+                <option value="student">student</option>
+                <option value="tutor">tutor</option>
               </select>
             </div>
-            {errors.role && (<p className="text-red-500 text-xs mt-1">{errors.role.message}
-                </p>
-              )}
+            {errors.role && (
+              <p className="text-red-500 text-xs mt-1">{errors.role.message}</p>
+            )}
 
             <div>
               <label htmlFor="email" className="block mb-2 text-sm">
@@ -236,10 +268,7 @@ const SignUp = () => {
           </div>
 
           <div>
-            <button
-              type="submit"
-              className="bg-lime-500 w-full rounded-md py-3 text-white"
-            >
+            <button type="submit" className="btn-primary w-full">
               Register
             </button>
           </div>
@@ -263,14 +292,14 @@ const SignUp = () => {
           Already have an account?{" "}
           <Link
             to="/login"
-            className="hover:underline hover:text-lime-500 text-gray-600"
+            className="hover:underline hover:text-purple-600 text-gray-600"
           >
             Login
           </Link>
           .
         </p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,15 +1,21 @@
 import { Link } from "react-router"
 import Container from './../Container';
+import { FaLocationDot } from "react-icons/fa6";
+import { IoCall } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0f172a] text-gray-300 py-12 px-6 md:px-20">
+    <footer className="bg-[#0f172a] text-gray-300 py-8 px-6 md:px-20">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
 
         {/* Brand Info */}
         <div>
-          <Link to='/' className="text-xl font-semibold text-white">eTuitionBd</Link>
+          <Link to='/' className="flex items-center gap-2 mb-4">
+          {/* <img src={logo} alt="LOGO" className="w-24"/> */}
+          <h2 className="text-purple-600 font-black text-2xl">e<span className="text-[#165754]">Tuition</span>Bd</h2>
+          </Link>
           <p className="mt-3 space-y-2 text-sm">
             eTuitionBd is a platform where students and tutors can easily 
             connect with each other. We provide qualified Home/Online tutors 
@@ -44,18 +50,18 @@ const Footer = () => {
         <h3 className="text-lg font-semibold text-white">Contact Us</h3>
           <ul className="mt-3 space-y-3 text-sm">
             <li className="flex items-start space-x-2">
-              <span>📍</span>
+              <span><FaLocationDot /></span>
               <span>
                 Dhaka Bangladesh.<br />
                 Dhaka Bangladesh.
               </span>
             </li>
             <li className="flex items-center space-x-2">
-              <span>📞</span>
+              <span><IoCall /></span>
               <span>(+88) 0123456789</span>
             </li>
             <li className="flex items-center space-x-2">
-              <span>📧</span>
+              <span><MdEmail /></span>
               <span>info@etuitionbd.com</span>
             </li>
           </ul>

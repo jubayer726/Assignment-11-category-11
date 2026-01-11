@@ -11,7 +11,7 @@ const OurTutors = ({toutorsPromise}) => {
     return (
         <div className="py-15">
           <Container>
-              <div className="text-container text-blue-900 text-center p-5">
+              <div className="text-container text-[#0b2b5c] text-center p-5">
                 <h1 className="text-3xl font-bold m-5">Why Choose Our Tutors</h1>
                 <p className="text-sm my-5 ">Our tutors are carefully selected for their expertise, teaching experience, and dedication to student growth. <br /> Each tutor provides personalized guidance, clear explanations, and structured lessons tailored to individual needs. <br /> We focus on building confidence, improving exam performance, and ensuring a supportive learning environment for every student.</p>
               </div>

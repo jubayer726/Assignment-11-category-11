@@ -29,6 +29,7 @@ import AdminRoute from './AdminRoute'
 import AdminReports from '../Dashboboard/AdminDashboard/AdminReports'
 import TuitionTypes from '../components/Home/TuitionType/TuitionType'
 import HowItWorks from '../components/Home/HowItWork/HowItWorks'
+import Dashboard2 from '../Dashboboard/Dashboard2'
 
 
 export const router = createBrowserRouter([
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
         element: <Contact />,
       },
       {
+        path: 'dashboard2',
+        element: <Dashboard2 />,
+      },
+      {
         path: '/tuition/:id',
         element: <TuitionDetails/>
       },
@@ -80,12 +85,12 @@ export const router = createBrowserRouter([
        {
         path: '/payment-cancel',
         element: <PayemtCancel/>
-      }
+      },
+      { path: '/login', element: <Login /> },
+      { path: '/signup', element: <SignUp /> },
       
     ],
   },
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <SignUp /> },
   {
     path: '/dashboard',
     element: (
