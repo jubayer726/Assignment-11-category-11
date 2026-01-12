@@ -55,7 +55,7 @@ const Login = () => {
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: true }}
-      className="flex justify-center items-center gap-24 min-h-screen"
+      className="flex justify-center items-center gap-20 min-h-screen"
     >
       <div>
         <motion.img
@@ -69,6 +69,66 @@ const Login = () => {
             ease: "easeInOut",
           }}
         />
+        <div class="max-w-md mx-auto mt-8 lg:flex gap-2">
+          <div class="relative overflow-hidden rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-white p-5 shadow-lg">
+            {/* <!-- Badge --> */}
+            <span class="absolute top-3 right-3 rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+              DEMO
+            </span>
+
+            {/* <!-- Title --> */}
+            <h3 class="mb-3 flex items-center gap-2 text-lg font-semibold text-blue-700">
+              🔐 For Studen
+            </h3>
+
+            {/* <!-- Credentials --> */}
+            <div class="space-y-2 text-sm">
+              <p class="flex justify-between rounded-md bg-white px-3 py-2 shadow-sm">
+                <span class="font-medium text-gray-600">Email</span>
+                <span class="font-mono text-blue-600">student@gmail.com </span>
+              </p>
+
+              <p class="flex justify-between rounded-md bg-white px-3 py-2 shadow-sm">
+                <span class="font-medium text-gray-600">Password</span>
+                <span class="font-mono text-blue-600">student@gmail.com</span>
+              </p>
+            </div>
+
+            {/* <!-- Note --> */}
+            <p class="mt-4 text-xs text-gray-500">
+              ⚠️ Demo account is for testing only. Data reset periodically.
+            </p>
+          </div>
+          <div class="relative overflow-hidden rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-white p-5 shadow-lg">
+            {/* <!-- Badge --> */}
+            <span class="absolute top-3 right-3 rounded-full bg-blue-600 px-3 py-1 text-xs font-semibold text-white">
+              DEMO
+            </span>
+
+            {/* <!-- Title --> */}
+            <h3 class="mb-3 flex items-center gap-2 text-lg font-semibold text-blue-700">
+              🔐 For Tutor
+            </h3>
+
+            {/* <!-- Credentials --> */}
+            <div class="space-y-2 text-sm">
+              <p class="flex justify-between rounded-md bg-white px-3 py-2 shadow-sm">
+                <span class="font-medium text-gray-600">Email</span>
+                <span class="font-mono text-blue-600">tutor@gmail.com</span>
+              </p>
+
+              <p class="flex justify-between rounded-md bg-white px-3 py-2 shadow-sm">
+                <span class="font-medium text-gray-600">Password</span>
+                <span class="font-mono text-blue-600">tutor@gmail.com</span>
+              </p>
+            </div>
+
+            {/* <!-- Note --> */}
+            <p class="mt-4 text-xs text-gray-500">
+              ⚠️ Demo account is for testing only. Data reset periodically.
+            </p>
+          </div>
+        </div>
       </div>
       <div className="flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900">
         <div className="mb-8 text-center">

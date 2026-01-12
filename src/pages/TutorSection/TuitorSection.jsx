@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import React, { useState } from "react";
 import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { FaLocationDot } from "react-icons/fa6";
 import { Link } from "react-router";
 
 const TuisorSection = () => {
@@ -57,14 +58,14 @@ const TuisorSection = () => {
           <input
             type="text"
             placeholder="Search by subject or class..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
+            // value={searchText}
+            // onChange={(e) => setSearchText(e.target.value)}
             className="w-full md:w-1/2 px-4 py-3 border border-purple-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
           />
 
           {/*  Filters */}
           <div className="flex gap-3 flex-wrap text-[#167570] font-semibold">
-            {["All", "Class Five", "Class Eight", "Class Ten", "H.S.C"].map(
+            {["All", "Dhaka", "Rajshahi", "Rangpur", "Mymensigh"].map(
               (cls) => (
                 <button
                   key={cls}
